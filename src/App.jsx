@@ -4,10 +4,16 @@ import Card from './components/Card';
 import CustomTaskInput from './components/CustomTaskInput';
 import Header from './components/Header';
 import ItemList from './components/ItemList';
+import Results from './components/Results';
 
 function App() {
   const [task, setTask] = useState('');
   const [items, setItems] = useState([]);
+  const [results, setResults] = useState({
+    all: 0,
+    complete: 0,
+    incomplete: 0,
+  });
 
   const addTask = (event) => {
     if (event.key === 'Enter') {
@@ -36,6 +42,19 @@ function App() {
     };
 
     setItems([...items]);
+
+    const all = items.length;
+    const complete = items.filter((item) => item.done).length;
+    const incomplete = all - complete;
+
+    const updatedResults = {
+      ...results,
+      all,
+      complete,
+      incomplete,
+    };
+
+    setResults(updatedResults);
   };
 
   return (
@@ -47,6 +66,7 @@ function App() {
         handleChange={handleChange}
       />
       <ItemList items={items} updateStatus={updateStatus} />
+      {items.length > 0 ? <Results results={results} /> : null}
     </Card>
   );
 }
