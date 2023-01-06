@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Item from './Item';
+import Mark from './Mark';
 
 const ItemContainer = styled.ul`
   padding: 0px;
@@ -11,17 +12,22 @@ const ItemContainer = styled.ul`
     list-style-type: decimal;
     font-size: 1.5rem;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 
 const ItemList = (props) => {
-  const { items } = props;
+  const { items, updateStatus } = props;
+
   return (
     <ItemContainer>
       {items.map((item) => {
         return (
-          <li key={item.id}>
+          <li className={'item-container'} key={item.id}>
             <Item item={item} />
+            <Mark item={item} updateStatus={updateStatus} />
           </li>
         );
       })}

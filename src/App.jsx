@@ -28,6 +28,16 @@ function App() {
     setTask(event.target.value);
   };
 
+  const updateStatus = (i) => {
+    const index = items.findIndex((item) => item.id === i.id);
+    items[index] = {
+      ...items[index],
+      done: !items[index].done,
+    };
+
+    setItems([...items]);
+  };
+
   return (
     <Card id='app' className='card'>
       <Header>To Do</Header>
@@ -36,7 +46,7 @@ function App() {
         addTask={addTask}
         handleChange={handleChange}
       />
-      <ItemList items={items} />
+      <ItemList items={items} updateStatus={updateStatus} />
     </Card>
   );
 }
