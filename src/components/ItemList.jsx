@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Item from './Item';
 
 const ItemContainer = styled.ul`
   padding: 0px;
@@ -18,7 +19,11 @@ const ItemList = (props) => {
   return (
     <ItemContainer>
       {items.map((item) => {
-        return <li key={item.id}>{item.title}</li>;
+        return (
+          <li key={item.id}>
+            <Item item={item} />
+          </li>
+        );
       })}
     </ItemContainer>
   );
