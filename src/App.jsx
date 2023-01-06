@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Card from './components/Card';
 import CustomTaskInput from './components/CustomTaskInput';
 import Header from './components/Header';
+import ItemList from './components/ItemList';
 
 function App() {
   const [task, setTask] = useState('');
@@ -35,6 +36,7 @@ function App() {
         addTask={addTask}
         handleChange={handleChange}
       />
+      <ItemList items={items} />
     </Card>
   );
 }
