@@ -2,6 +2,6 @@ span {
   overflow-wrap: break-word;
 }
 
-.done {
+span.done {
   text-decoration-line: line-through;
 }
