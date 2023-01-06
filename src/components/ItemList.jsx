@@ -12,9 +12,6 @@ const ItemContainer = styled.ul`
     list-style-type: decimal;
     font-size: 1.5rem;
     margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 `;
 
@@ -25,7 +22,7 @@ const ItemList = (props) => {
     <ItemContainer>
       {items.map((item) => {
         return (
-          <li className={'item-container'} key={item.id}>
+          <li key={item.id}>
             <Item item={item} />
             <Mark item={item} updateStatus={updateStatus} />
           </li>
