@@ -1,10 +1,12 @@
+import Card from './components/Card';
 import Header from './components/Header';
-import './App.css';
 
 function App() {
   return (
-    <div className='App'>
-      <Header>To Do</Header>
+    <div id='app'>
+      <Card className='card'>
+        <Header>To Do</Header>
+      </Card>
     </div>
   );
 }
