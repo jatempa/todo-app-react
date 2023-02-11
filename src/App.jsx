@@ -8,13 +8,8 @@ import ItemList from './components/ItemList';
 import Results from './components/Results';
 
 function App() {
-  const { tasks, setTasks } = useTasks();
+  const { tasks, setTasks, results } = useTasks();
   const [task, setTask] = useState('');
-  const [results, setResults] = useState({
-    all: 0,
-    complete: 0,
-    incomplete: 0,
-  });
 
   const addTask = (event) => {
     if (event.key === 'Enter') {
@@ -43,19 +38,6 @@ function App() {
     };
 
     setTasks([...tasks]);
-
-    const all = tasks.length;
-    const complete = tasks.filter((task) => task.done).length;
-    const incomplete = all - complete;
-
-    const updatedResults = {
-      ...results,
-      all,
-      complete,
-      incomplete,
-    };
-
-    setResults(updatedResults);
   };
 
   return (
