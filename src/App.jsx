@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
+import { useTasks } from './hooks/useTasks';
 import Card from './components/Card';
 import CustomTaskInput from './components/CustomTaskInput';
 import Header from './components/Header';
@@ -7,8 +8,8 @@ import ItemList from './components/ItemList';
 import Results from './components/Results';
 
 function App() {
+  const { tasks, setTasks } = useTasks();
   const [task, setTask] = useState('');
-  const [items, setItems] = useState([]);
   const [results, setResults] = useState({
     all: 0,
     complete: 0,
@@ -19,13 +20,13 @@ function App() {
     if (event.key === 'Enter') {
       if (!task || task.length === 0) return;
 
-      const newItem = {
+      const newTask = {
         id: uuidv4(),
         title: task,
         done: false,
       };
 
-      setItems([...items, newItem]);
+      setTasks([...tasks, newTask]);
       setTask('');
     }
   };
@@ -35,16 +36,16 @@ function App() {
   };
 
   const updateStatus = (i) => {
-    const index = items.findIndex((item) => item.id === i.id);
-    items[index] = {
-      ...items[index],
-      done: !items[index].done,
+    const index = tasks.findIndex((task) => task.id === i.id);
+    tasks[index] = {
+      ...tasks[index],
+      done: !tasks[index].done,
     };
 
-    setItems([...items]);
+    setTasks([...tasks]);
 
-    const all = items.length;
-    const complete = items.filter((item) => item.done).length;
+    const all = tasks.length;
+    const complete = tasks.filter((task) => task.done).length;
     const incomplete = all - complete;
 
     const updatedResults = {
@@ -65,8 +66,8 @@ function App() {
         addTask={addTask}
         handleChange={handleChange}
       />
-      <ItemList items={items} updateStatus={updateStatus} />
-      {items.length > 0 ? <Results results={results} /> : null}
+      <ItemList items={tasks} updateStatus={updateStatus} />
+      {tasks.length > 0 ? <Results results={results} /> : null}
     </Card>
   );
 }
