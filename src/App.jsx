@@ -41,7 +41,7 @@ function App() {
   };
 
   return (
-    <Card id='app' className='card'>
+    <Card className='card'>
       <Header>To Do</Header>
       <CustomTaskInput
         task={task}
